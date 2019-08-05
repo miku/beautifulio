@@ -13,4 +13,15 @@ Talk about beautiful IO with Go.
 > I have fallen in love with the flexibility of io.Reader and io.Writer when
 > dealing with any stream of data in Go.
 
+Target: 30-35 minutes, 15 sentences pm, 450 sentences, written down: 10 pages.
+
+# Learning goals
+
+* io package overview (go doc)
+* how custom readers are implemented (stdlib)
+* how standard library readers and writers are implemented (stdlib)
+* what are some strange implementations of readers and writer (scan github)
+* examples of how you can combine interfaces
+* examples where the flexibility pays off
+* memory efficient data processing pipelines
 

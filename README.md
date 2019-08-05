@@ -25,3 +25,15 @@ Target: 30-35 minutes, 15 sentences pm, 450 sentences, written down: 10 pages.
 * examples where the flexibility pays off
 * memory efficient data processing pipelines
 
+Examples:
+
+* image filters, real time (combinations)
+* GAN generated images from TF
+* function plotter
+
+What rough classes of readers are there?
+
+* persistence (files, databases, ...)
+* transformation (compression, hashing, image filter)
+* synthetic data
+* distortion (flaky readers, slow internet connection, ...)

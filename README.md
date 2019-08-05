@@ -13,7 +13,8 @@ Talk about beautiful IO with Go.
 > I have fallen in love with the flexibility of io.Reader and io.Writer when
 > dealing with any stream of data in Go.
 
-Target: 30-35 minutes, 15 sentences pm, 450 sentences, written down: 10 pages.
+Target: 30-35 minutes, 15 sentences pm, 450 sentences, written down: 10 pages,
+maybe 50-80 slides, 40 slides and 15 minutes of coding.
 
 # Learning goals
 
@@ -43,3 +44,11 @@ Performance considerations:
 * ReaderFrom
 * Allocations, buffer reuse
 * ring buffers
+
+# Run a few benchmarks
+
+* Copy, CopyBuffer, CopyN - with various sizes
+
+# Snippets
+
+> Package io provides basic interfaces to I/O primitives.

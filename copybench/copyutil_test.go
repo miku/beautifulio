@@ -39,3 +39,22 @@ func BenchmarkSimple(b *testing.B) {
 		})
 	}
 }
+
+func BenchmarkCopyBuffer(b *testing.B) {
+	sizes := []int{1 * M, 10 * M, 100 * M, 1 * G, 10 * G, 50 * G}
+	bufs := []int{1, 8, 1024, 4096, 8192, 16384, 32768}
+	for _, size := range sizes {
+		for _, bs := range bufs {
+			b.Run(fmt.Sprintf("size-%d-buf-%d", size, bs), func(sb *testing.B) {
+				f := EmptyFile(size)
+				buffer := make([]byte, bs)
+				for i := 0; i < sb.N; i++ {
+					_, err := io.CopyBuffer(ioutil.Discard, f, buffer)
+					if err != nil {
+						b.Errorf("want %v, got %v", nil, err)
+					}
+				}
+			})
+		}
+	}
+}

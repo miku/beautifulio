@@ -37,3 +37,9 @@ What rough classes of readers are there?
 * transformation (compression, hashing, image filter)
 * synthetic data
 * distortion (flaky readers, slow internet connection, ...)
+
+Performance considerations:
+
+* ReaderFrom
+* Allocations, buffer reuse
+* ring buffers

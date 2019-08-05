@@ -25,9 +25,9 @@ SWE [@ubleipzig](https://ub.uni-leipzig.de) and web data engineer
 
 > La bellezza è negli occhi di chi guarda
 
-* io.Reader and io.Writer are single method interfaces, with dozens of implementations
-* stackable, composable
-* reminiscent of UNIX pipes, where a byte stream (text) serves as the universal interface
+* small, versatile interfaces
+* stackable
+* reminiscent of UNIX pipes
 
 ----
 
@@ -40,5 +40,36 @@ SWE [@ubleipzig](https://ub.uni-leipzig.de) and web data engineer
 
 > Which brings me to io.Reader, easily my favourite Go interface. --
 > [@davecheney](https://twitter.com/davecheney)
+
+----
+
+# What's in io?
+
+<!--
+$ go doc io | grep ^type | wc -l
+25
+-->
+
+* 25 types - of which 21 are interfaces, 7 functions, 3 constants, 6 errors
+
+The four non-interfaces types are: `LimitedReader`, `PipeReader`, `PipeWriter`,
+`SectionReader`. Functions: `Copy*`, `Pipe`, `ReadAtLeast`, `ReadFull`,
+`WriteString`.
+
+----
+
+# How many readers are in the standard library?
+
+* TODO: count
+
+----
+
+# How do you implement one?
+
+```go
+type Reader interface {
+        Read(p []byte) (n int, err error)
+}
+```
 
 

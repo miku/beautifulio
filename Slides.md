@@ -31,4 +31,14 @@ SWE [@ubleipzig](https://ub.uni-leipzig.de) and web data engineer
 
 ----
 
+# Love and praise
+
+> This article aims to convince you to use io.Reader in your own code wherever
+> you can. -- @matryer
+
+> "Crossing Streams: a love letter to Go io.Reader" -- @jmoiron
+
+> Which brings me to io.Reader, easily my favourite Go interface. --
+> @davecheney
+
 

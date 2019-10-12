@@ -47,4 +47,4 @@ LIMIT 100
 
 ----
 
-The buffersize of 4K is relatively good. Why? Is it the pagesize? Cacheline?
+The buffersize of 4K is relatively good. Why? Is it the pagesize? Cacheline?    

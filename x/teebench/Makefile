@@ -11,21 +11,13 @@ B = 1
 # 107374182400  | 100GB
 # 1099511627776 |   1TB
 
-noopfilter: main.go
+teebench: main.go
 	go build -o $@ $<
 
 .PHONY: run
-run: noopfilter
-	cat /dev/zero | head -c $(SIZE) | ./noopfilter > /dev/null
-
-.PHONY: runb
-runb: noopfilter
-	cat /dev/zero | head -c $(SIZE) | ./noopfilter -b $(B) > /dev/null
-
-largefile:
-	cat /dev/zero | head -c $(SIZE) > $@
+run: teebench
+	cat /dev/zero | head -c $(SIZE) | ./teebench > /dev/null
 
 .PHONY: clean
 clean:
-	rm -f noopfilter largefile
-
+	rm -f teebench

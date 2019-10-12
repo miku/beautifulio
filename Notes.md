@@ -399,3 +399,6 @@ func (c *EndlessReader) Read(p []byte) (int, error) {
 }
 ```
 
+Writers have a few other areas, e.g. formatting.
+
+* github/hub/vendor/github.com/kr/text/indent.go

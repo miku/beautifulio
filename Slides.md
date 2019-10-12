@@ -1,13 +1,19 @@
 # Beautiful IO
 
-Golab 2019, 2019-10-21, Firenze
+> A tour through standard library pkg/io and various implementations of its interfaces.
+
+Golab 2019, 2019–10–21, Firenze
 [Martin Czygan](mailto:martin.czygan@gmail.com)
+
+<!-- Die Brautleute; short summaries at the beginning of the sections -->
 
 ----
 
 # About me
 
 SWE [@ubleipzig](https://ub.uni-leipzig.de) working mostly with Python and Go.
+
+Taming data – open source – writing.
 
 > [Explore IO](https://github.com/miku/exploreio) workshop at Golab 2017.
 
@@ -48,11 +54,12 @@ $ go doc io | grep ^type | wc -l
 25
 -->
 
-* 25 types - of which 21 are interfaces, 7 functions, 3 constants, 6 errors
+* 25 types - of which 21 are interfaces, 12 functions, 3 constants, 6 errors
 * Four concrete types are: `LimitedReader`, `PipeReader`, `PipeWriter`,
 `SectionReader`.
-* Functions: `Copy*`, `Pipe`, `ReadAtLeast`, `ReadFull`,
-`WriteString`.
+* Functions: `Copy`, `CopyN`, `CopyBuffer`, `Pipe`, `ReadAtLeast`, `ReadFull`,
+  `WriteString`, `LimitReader`, `MultiReader`, `TeeReader`, `NewSectionReader`,
+  `MultiWriter`
 
 ----
 

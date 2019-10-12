@@ -102,3 +102,20 @@ newBufioReader
 Random notes:
 
 * writeHeader with status code > 1000 panics
+
+----
+
+From the "Live of a Writer" - "the writers are wired together like this ..." (~1500)
+
+----
+
+Ensuring interface compliance, via:
+
+```go
+type interface closeWriter{ CloseWrite() error }
+
+var _ closeWriter = (*net.TCPConn)(nil)
+```
+
+----
+

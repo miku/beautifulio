@@ -5,8 +5,11 @@ import (
 	"log"
 	"os"
 	"runtime"
+	"strings"
 	"sync"
 )
+
+// XXX: Why does this deadlock?
 
 func main() {
 	pr, pw := io.Pipe()
@@ -28,9 +31,12 @@ func main() {
 
 	log.Printf("G2=%d", runtime.NumGoroutine())
 
-	if _, err := io.WriteString(pw, "Hello World\n"); err != nil {
-		log.Fatal(err)
-	}
+	go func() {
+		sr := strings.NewReader("Hello World")
+		if _, err := io.Copy(pw, sr); err != nil {
+			log.Fatal(err)
+		}
+	}()
 
 	// We cannot guaratee, that this is executed after wg.Done(), so we get a
 	// deadlock. This waits already, but the other thread hat not been

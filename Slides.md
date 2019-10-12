@@ -7,8 +7,7 @@ Golab 2019, 2019-10-21, Firenze
 
 # About me
 
-SWE [@ubleipzig](https://ub.uni-leipzig.de) and web data engineer
-[@internetarchive](https://archive.org) working mostly with Python and Go.
+SWE [@ubleipzig](https://ub.uni-leipzig.de) working mostly with Python and Go.
 
 > [Explore IO](https://github.com/miku/exploreio) workshop at Golab 2017.
 
@@ -26,8 +25,7 @@ SWE [@ubleipzig](https://ub.uni-leipzig.de) and web data engineer
 > La bellezza è negli occhi di chi guarda
 
 * small, versatile interfaces
-* stackable
-* reminiscent of UNIX pipes
+* composable
 
 ----
 
@@ -43,7 +41,7 @@ SWE [@ubleipzig](https://ub.uni-leipzig.de) and web data engineer
 
 ----
 
-# What's in io?
+# What's in pkg/io?
 
 <!--
 $ go doc io | grep ^type | wc -l
@@ -51,25 +49,33 @@ $ go doc io | grep ^type | wc -l
 -->
 
 * 25 types - of which 21 are interfaces, 7 functions, 3 constants, 6 errors
-
-The four non-interfaces types are: `LimitedReader`, `PipeReader`, `PipeWriter`,
-`SectionReader`. Functions: `Copy*`, `Pipe`, `ReadAtLeast`, `ReadFull`,
+* Four concrete types are: `LimitedReader`, `PipeReader`, `PipeWriter`,
+`SectionReader`.
+* Functions: `Copy*`, `Pipe`, `ReadAtLeast`, `ReadFull`,
 `WriteString`.
 
 ----
 
-# How many readers are in the standard library?
+# How many readers, writers are in the standard library?
 
 * TODO: count
 
 ----
 
-# How do you implement one?
+# How do you implement them?
 
 ```go
 type Reader interface {
         Read(p []byte) (n int, err error)
 }
 ```
+
+```go
+type Writer interface {
+        Write(p []byte) (n int, err error)
+}
+```
+
+----
 
 

@@ -44,3 +44,7 @@ FROM `bigquery-public-data.github_repos.languages` as ls, ls.language as languag
 WHERE language.name = 'go'
 LIMIT 100
 ```
+
+----
+
+The buffersize of 4K is relatively good. Why? Is it the pagesize? Cacheline?

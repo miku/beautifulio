@@ -52,3 +52,53 @@ The buffersize of 4K is relatively good. Why? Is it the pagesize? Cacheline?
 ----
 
 > Eat writes! // Eat writes.
+
+----
+
+Hiding certain interfaces, temporarily:
+
+```go
+type writerOnly struct {
+    io.Writer
+}
+```
+
+Interesting: the ReadFrom itself uses writerOnly, in order to not get stuck in an infinite loop.
+
+----
+
+Inquiring about a reader.
+
+Reader hides lots of things, but it can be interrogated with type assertions: `srcIsRegularFile(src io.Reader)`
+
+----
+
+* Optimizing read from file to a network connection.
+
+```go
+func (r *response) ReadFrom(r io.Reader) (n int64, err error) ... for sendfile
+```
+
+----
+
+Wrapper examples: http.connReader.
+
+Random bit: "Fortunately, almost nothing uses HTTP/1.x pipelining"
+
+----
+
+Neat bufio Pool helper:
+
+```go
+newBufioReader
+```
+
+----
+
+> expectContinueReader, wraps a readCloser - which on first read, sends an HTTP/1.1 100 Continue header
+
+----
+
+Random notes:
+
+* writeHeader with status code > 1000 panics

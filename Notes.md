@@ -402,3 +402,17 @@ func (c *EndlessReader) Read(p []byte) (int, error) {
 Writers have a few other areas, e.g. formatting.
 
 * github/hub/vendor/github.com/kr/text/indent.go
+
+----
+
+Via:
+
+* https://medium.com/learning-the-go-programming-language/streaming-io-in-go-d93507931185
+
+Mention the rules of r.Read()
+
+* will read len(p) or less
+* n may be less than len(p)
+* on error byte slice still filled
+* implementation dependent: n>0 and err=io.EOF, or n>0, err=nil, or n=0, err=io.EOF
+* n=0, err=nil is not an end, may return more data

@@ -416,3 +416,17 @@ Mention the rules of r.Read()
 * on error byte slice still filled
 * implementation dependent: n>0 and err=io.EOF, or n>0, err=nil, or n=0, err=io.EOF
 * n=0, err=nil is not an end, may return more data
+
+----
+
+```
+return struct {
+    io.ReadSeeker
+    io.Closer
+}{
+    io.NewSectionReader(strings.NewReader(s), 0, int64(len(s))),
+    ioutil.NopCloser(nil),
+}
+```
+
+* https://talks.golang.org/2015/tricks.slide#16

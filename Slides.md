@@ -284,6 +284,37 @@ func main() {
 }
 ```
 
-* Also try: https://tour.golang.org/methods/22
+* Also try: https://tour.golang.org/methods/22 (Reader exercise, ROT13)
 
 ----
+
+# The io.Writer interface
+
+Analogous to the `io.Reader` interface.
+
+```go
+type Writer interface {
+        Write(p []byte) (n int, err error)
+}
+```
+
+> Write writes len(p) bytes from p to the underlying data stream. It returns the
+> number of bytes written from p (0 <= n <= len(p)) and any error encountered
+> that caused the write to stop early.
+
+> Write must return a non-nil error if it returns n < len(p). Write must not
+> modify the slice data, even temporarily.
+
+As with readers:
+
+> Implementations must not retain p. 
+
+----
+
+# An example
+
+A writer that does not much, but is still useful.
+
+```go
+
+```

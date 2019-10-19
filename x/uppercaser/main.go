@@ -18,7 +18,9 @@ func (r *UpperReader) Read(p []byte) (int, error) {
 }
 
 func main() {
-	if _, err := io.Copy(os.Stdout, &UpperReader{os.Stdin}); err != nil {
+	if n, err := io.Copy(os.Stdout, &UpperReader{os.Stdin}); err != nil {
 		log.Fatal(err)
+	} else {
+		log.Printf("copied %d bytes", n)
 	}
 }

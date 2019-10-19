@@ -313,8 +313,27 @@ As with readers:
 
 # An example
 
-A writer that does not much, but is still useful.
+A writer that does not much, but is still useful - `/dev/null` in Go:
 
 ```go
+type devNull struct{}
 
+func (w *devNull) Write(p []byte) (int, error) {
+	return len(p), nil
+}
+
+func main() {
+	if n, err := io.Copy(&devNull{}, strings.NewReader("Hello World")); err != nil {
+		log.Fatal(err)
+	} else {
+		log.Printf("%d bytes copied", n)
+	}
+}
 ```
+
+The standard library implementation is called `ioutil.Discard` (for an
+interesting/frustrating bug related to ioutil.Discard, read
+[#4589](https://github.com/golang/go/issues/4589)).
+
+----
+

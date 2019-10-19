@@ -8,6 +8,7 @@ require (
 	github.com/facebookincubator/ent v0.0.0-20191017212932-c3135d03a644 // indirect
 	github.com/go-delve/delve v1.3.1 // indirect
 	github.com/golangci/golangci-lint v1.21.0 // indirect
+	github.com/josharian/impl v0.0.0-20190715203526-f0d59e96e372 // indirect
 	github.com/keegancsmith/rpc v1.1.0 // indirect
 	github.com/mibk/dupl v1.0.0 // indirect
 	github.com/miku/solrbulk v0.3.4 // indirect

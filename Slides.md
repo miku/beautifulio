@@ -65,7 +65,7 @@ $ go doc io | grep ^type | wc -l
 -->
 
 * 25 types
-* 21/25 are interfaces, four concrete type
+* 21/25 are interfaces
 * 12 functions, 3 constants, 6 errors
 
 The concrete types are: `LimitedReader`, `PipeReader`, `PipeWriter`,

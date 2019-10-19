@@ -6,10 +6,13 @@ import (
 	"go/printer"
 	"go/token"
 	"go/types"
+	"io"
 
 	"golang.org/x/tools/go/analysis"
 	"golang.org/x/tools/go/analysis/singlechecker"
 )
+
+var x io.Writer
 
 var Analyzer = &analysis.Analyzer{
 	Name: "addlint",

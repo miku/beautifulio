@@ -430,3 +430,8 @@ return struct {
 ```
 
 * https://talks.golang.org/2015/tricks.slide#16
+
+----
+
+```
+

@@ -2,7 +2,7 @@
 
 > A tour through standard library pkg/io and various implementations of its interfaces.
 
-Golab 2019, 2019–10–21, Firenze
+Golab 2019, 2019–10–21, Florence
 [Martin Czygan](mailto:martin.czygan@gmail.com)
 
 <!-- Die Brautleute; short summaries at the beginning of the sections -->
@@ -19,10 +19,20 @@ Taming data – open source – writing.
 
 ----
 
+# Background
+
+* Go Proverbs (2015)
+
+> The bigger the interface, the weaker the abstraction.
+
+Prominent examples are `io.Reader` and `io.Writer`.
+
+----
+
 # The IO package
 
 * contains basic, widely used interfaces (within and outside standard library)
-* simple, flexible helpers
+* utility functions
 
 ----
 
@@ -54,35 +64,59 @@ $ go doc io | grep ^type | wc -l
 25
 -->
 
-* 25 types - of which 21 are interfaces, 12 functions, 3 constants, 6 errors
-* Four concrete types are: `LimitedReader`, `PipeReader`, `PipeWriter`,
-`SectionReader`.
-* Functions: `Copy`, `CopyN`, `CopyBuffer`, `Pipe`, `ReadAtLeast`, `ReadFull`,
-  `WriteString`, `LimitReader`, `MultiReader`, `TeeReader`, `NewSectionReader`,
-  `MultiWriter`
+* 25 types
+* 21/25 are interfaces, four concrete type
+* 12 functions, 3 constants, 6 errors
+
+The concrete types are: `LimitedReader`, `PipeReader`, `PipeWriter`,
+  `SectionReader`; functions: `Copy`, `CopyN`, `CopyBuffer`, `Pipe`,
+  `ReadAtLeast`, `ReadFull`, `WriteString`, `LimitReader`, `MultiReader`,
+  `TeeReader`, `NewSectionReader`, `MultiWriter`
 
 ----
 
-# How many readers, writers are in the standard library?
+# A few Interfaces
 
-* TODO: count
+|                    | R | W | C | S |
+|--------------------|---|---|---|---|
+| io.Reader          | x |   |   |   |
+| io.Writer          |   | x |   |   |
+| io.Closer          |   |   | x |   |
+| io.Seeker          |   |   |   | x |
+| io.ReadWriter      | x | x |   |   |
+| io.ReadCloser      | x |   | x |   |
+| io.ReadSeeker      | x |   |   | x |
+| io.WriteCloser     |   | x | x |   |
+| io.WriteSeeker     |   | x |   | x |
+| io.ReadWriteCloser | x | x | x |   |
+| io.ReadWriteSeeker | x | x |   | x |
 
 ----
 
-# How do you implement them?
+# Missing interfaces
+
+![](static/go4extra.png)
+
+----
+
+# How many readers, writers are there?
+
+```shell
+$ guru -json implements /usr/local/go/src/io/io.go:#3309
+```
+
+----
+
+# What is a Reader?
 
 ```go
 type Reader interface {
         Read(p []byte) (n int, err error)
 }
 ```
-
-```go
-type Writer interface {
-        Write(p []byte) (n int, err error)
-}
-```
+* at most `len(p)` bytes are read
+* to signal the end of a stream, return `io.EOF`
+* `n` might or might not be zero, when `io.EOF` is returned
 
 ----
-
 

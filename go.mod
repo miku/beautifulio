@@ -9,6 +9,7 @@ require (
 	github.com/fatih/gomodifytags v1.0.1 // indirect
 	github.com/fatih/motion v1.0.0 // indirect
 	github.com/go-delve/delve v1.3.1 // indirect
+	github.com/go4org/go4 v0.0.0-20191010144846-132d2879e1e9 // indirect
 	github.com/golangci/golangci-lint v1.21.0 // indirect
 	github.com/google/shlex v0.0.0-20181106134648-c34317bd91bf // indirect
 	github.com/josharian/impl v0.0.0-20190715203526-f0d59e96e372 // indirect

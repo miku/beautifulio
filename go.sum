@@ -140,6 +140,8 @@ github.com/go-toolsmith/strparse v1.0.0 h1:Vcw78DnpCAKlM20kSbAyO4mPfJn/lyYA4BJUD
 github.com/go-toolsmith/strparse v1.0.0/go.mod h1:YI2nUKP9YGZnL/L1/DLFBfixrcjslWct4wyljWhSRy8=
 github.com/go-toolsmith/typep v1.0.0 h1:zKymWyA1TRYvqYrYDrfEMZULyrhcnGY3x7LDKU2XQaA=
 github.com/go-toolsmith/typep v1.0.0/go.mod h1:JSQCQMUPdRlMZFswiq3TGpNp1GMktqkR2Ns5AIQkATU=
+github.com/go4org/go4 v0.0.0-20191010144846-132d2879e1e9 h1:uPijbKBDEVrMNEfeh2dkmIbsLD8Z9t4kfC4b/94omb0=
+github.com/go4org/go4 v0.0.0-20191010144846-132d2879e1e9/go.mod h1:BLAKVUWoYZ2kTodPmXRcZB5wK1cHTxSfm3pGzLp+dqk=
 github.com/gobwas/glob v0.2.3 h1:A4xDbljILXROh+kObIiy5kIaPYD8e96x1tgBhUI5J+Y=
 github.com/gobwas/glob v0.2.3/go.mod h1:d3Ez4x06l9bZtSvzIay5+Yzi0fmZzPgnTbPcKjJAkT8=
 github.com/gofrs/flock v0.0.0-20190320160742-5135e617513b h1:ekuhfTjngPhisSjOJ0QWKpPQE8/rbknHaes6WVJj5Hw=
@@ -506,6 +508,7 @@ go.uber.org/atomic v1.4.0/go.mod h1:gD2HeocX3+yG+ygLZcrzQJaqmWj9AIm7n08wl/qW/PE=
 go.uber.org/multierr v1.1.0/go.mod h1:wR5kodmAFQ0UK8QlbwjlSNy0Z68gJhDJUG5sjR94q/0=
 go.uber.org/zap v1.10.0/go.mod h1:vwi/ZaCAaUcBkycHslxD9B2zi4UTXhF60s6SWpuDF0Q=
 go4.org v0.0.0-20180809161055-417644f6feb5/go.mod h1:MkTOUMDaeVYJUOUsaDXIhWPZYa1yOyC1qaOBpL57BhE=
+go4.org v0.0.0-20190313082347-94abd6928b1d h1:JkRdGP3zvTtTbabWSAC6n67ka30y7gOzWAah4XYJSfw=
 go4.org v0.0.0-20190313082347-94abd6928b1d/go.mod h1:MkTOUMDaeVYJUOUsaDXIhWPZYa1yOyC1qaOBpL57BhE=
 golang.org/x/arch v0.0.0-20171004143515-077ac972c2e4 h1:TP7YcWHbnFq4v8/3wM2JwgM0SRRtsYJ7Z6Oj0arz2bs=
 golang.org/x/arch v0.0.0-20171004143515-077ac972c2e4/go.mod h1:cYlCBUl1MsqxdiKgmc4uh7TxZfWSFLOGSRR090WDxt8=

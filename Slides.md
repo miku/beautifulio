@@ -77,23 +77,14 @@ The concrete types are: `LimitedReader`, `PipeReader`, `PipeWriter`,
 
 # A few Interfaces
 
-|                    | R | W | C | S |
-|--------------------|---|---|---|---|
-| io.Reader          | x |   |   |   |
-| io.Writer          |   | x |   |   |
-| io.Closer          |   |   | x |   |
-| io.Seeker          |   |   |   | x |
-| io.ReadWriter      | x | x |   |   |
-| io.ReadCloser      | x |   | x |   |
-| io.ReadSeeker      | x |   |   | x |
-| io.WriteCloser     |   | x | x |   |
-| io.WriteSeeker     |   | x |   | x |
-| io.ReadWriteCloser | x | x | x |   |
-| io.ReadWriteSeeker | x | x |   | x |
+
+![](static/iointftab.png)
 
 ----
 
 # Missing interfaces
+
+You might find some missing pieces elsewhere.
 
 ![](static/go4extra.png)
 
@@ -105,6 +96,8 @@ The concrete types are: `LimitedReader`, `PipeReader`, `PipeWriter`,
 $ guru -json implements /usr/local/go/src/io/io.go:#3309
 ```
 
+I counted over 280 implementations of io.Reader and X of io.Writer.
+
 ----
 
 # What is a Reader?
@@ -114,9 +107,14 @@ type Reader interface {
         Read(p []byte) (n int, err error)
 }
 ```
+
+The reader implementation will populate a given byte slice.
+
 * at most `len(p)` bytes are read
 * to signal the end of a stream, return `io.EOF`
 * `n` might or might not be zero, when `io.EOF` is returned
 
 ----
+
+
 

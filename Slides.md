@@ -190,16 +190,81 @@ b, err := ioutil.ReadAll(r)
 
 Instead of writing:
 
-```
+```go
 b, _ := ioutil.ReadAll(resp.Body) // Pressure on memory.
 fmt.Println(string(b))
 ```
 
-You can just connect streams:
+You may want to connect streams:
 
-```
+```go
 _, _ = io.Copy(os.Stdout, resp.Body)
 ```
 
 ----
 
+# Stream advantages
+
+* memory efficient
+* can work with data, that does not fit in memory
+* allows to work on different protocol parts differently (e.g. HTTP header vs HTTP body)
+
+----
+
+# Another example
+
+We often need to unmarshal JSON.
+
+```go
+_ = json.Unmarshal(data, &v) // data might come from ioutil.ReadAll(resp.Body)
+```
+
+But we can decode it as well.
+
+```go
+_ = json.NewDecoder(resp.Body).Decode(&v)
+```
+
+In this case, the JSON data must be fully read, so this is a weak example.
+
+----
+
+# Glipse at composition
+
+But what is we want need to preprocess the data, e.g. decompress it. Streams
+compose well.
+
+```go
+zr, _ = gzip.NewReader(resp.Body)
+_ json.NewDecoder(zr).Decode(&)
+```
+
+----
+
+# How do you implement one yourself?
+
+You only need a `Read` method with the correct signature.
+
+* Example: `/dev/zero`
+
+```go
+type devZero struct{}
+
+func (r *devZero) Read(p []byte) (int, error) {
+        for i := 0; i < len(p); i++ {
+                p[i] = '\x00'
+        }
+        return len(p), nil
+}
+```
+
+This is already an infinite stream.
+
+----
+
+# Embed a reader
+
+Often you want to transform a given data stream, so you embed it.
+
+```go
+```

@@ -8,6 +8,7 @@ import (
 )
 
 func main() {
+	log.Fatal("err")
 	r := strings.NewReader("Hello World")
 	buf := make([]byte, 1000)
 	log.Println("CopyBuffer")

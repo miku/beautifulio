@@ -26,8 +26,10 @@ require (
 	github.com/stamblerre/gocode v0.0.0-20190327203809-810592086997 // indirect
 	github.com/tobert/pcstat v0.0.0-20170528024208-91a7346e5b46 // indirect
 	github.com/zmb3/gogetdoc v0.0.0-20190228002656-b37376c5da6a // indirect
+	golang.org/x/crypto v0.0.0-20191011191535-87dc89f01550 // indirect
 	golang.org/x/tools v0.0.0-20191018212557-ed542cd5b28a
 	golang.org/x/tools/gopls v0.1.7 // indirect
 	gopkg.in/alecthomas/kingpin.v3-unstable v3.0.0-20180810215634-df19058c872c // indirect
+	gotest.tools v2.2.0+incompatible // indirect
 	sourcegraph.com/sqs/goreturns v0.0.0-20181028201513-538ac6014518 // indirect
 )

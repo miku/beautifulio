@@ -45,7 +45,7 @@ Prominent examples are `io.Reader` and `io.Writer`.
 
 ----
 
-# Love and praise
+# Praise and love
 
 > This article aims to convince you to use io.Reader in your own code wherever
 > you can. -- [@matryer](https://twitter.com/matryer)
@@ -112,9 +112,94 @@ The reader implementation will populate a given byte slice.
 
 * at most `len(p)` bytes are read
 * to signal the end of a stream, return `io.EOF`
-* `n` might or might not be zero, when `io.EOF` is returned
+
+There is some flexibility around the end of a stream.
+
+> Callers should always process the n > 0 bytes returned before considering the
+error err. Doing so correctly handles I/O errors that happen after reading
+some bytes and also both of the allowed EOF behaviors.
 
 ----
 
+# Notes 
 
+```go
+type Reader interface {
+        Read(p []byte) (n int, err error)
+}
+```
+
+* The byte slice is under the control of the caller.
+
+> Implementations must not retain p.
+
+This hints at the streaming nature of this interface.
+
+----
+
+# Implementations
+
+* files
+* network connections
+* HTTP response bodies
+* standard input and output
+* compression
+* hashing
+* encoding
+* formatting
+* ...
+
+Many uses in testing as well.
+
+----
+
+# Structural typing
+
+* conversions are not required, a file implements `Read` and hence *is* a
+  *io.Reader*
+
+![](static/filetoreader.png)
+
+----
+
+# Streams
+
+As layed out in the *love letter*, the use of `ioutil.ReadAll` is debatable.
+It's in the standard library and useful, but not always necessary.
+
+```go
+b, err := ioutil.ReadAll(r)
+...
+```
+
+----
+
+# Streams
+
+* you may lose the advantage to use the `Reader` in other places
+* you may consume more memory
+
+> Streams can trivially produce infinite output while using barely any memory at
+> all - imagine an implementation behaving like /dev/zero or /dev/urandom.
+
+* Memory control is an important advantage.
+
+----
+
+# Follow the stream
+
+Instead of writing:
+
+```
+b, _ := ioutil.ReadAll(resp.Body) // Pressure on memory.
+fmt.Println(string(b))
+```
+
+You can just connect streams:
+
+```
+_, _ = io.Copy(os.Stdout, resp.Body)
+```
+
+----
 

@@ -267,4 +267,23 @@ This is already an infinite stream.
 Often you want to transform a given data stream, so you embed it.
 
 ```go
+type UpperReader struct {
+	r io.Reader // Underlying stream
+}
+
+func (r *UpperReader) Read(p []byte) (int, error) {
+	n, err := r.r.Read(p)
+	copy(p, bytes.ToUpper(p))
+	return n, err
+}
+
+func main() {
+	if _, err := io.Copy(os.Stdout, &UpperReader{os.Stdin}); err != nil {
+		log.Fatal(err)
+	}
+}
 ```
+
+* Also try: https://tour.golang.org/methods/22
+
+----

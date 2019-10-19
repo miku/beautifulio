@@ -337,3 +337,30 @@ interesting/frustrating bug related to ioutil.Discard, read
 
 ----
 
+# Use case: File
+
+Prototypical stream: A file.
+
+* os.File
+
+And alternatives and substitutions, e.g. dummy files for tests or file that
+support atomic writes.
+
+Historical note:
+
+> A file is just a sequence of bytes. (XXX: Unix documentary)
+
+If a file is just a sequence of bytes, more things will look like files.
+
+----
+
+# Use case: Networking
+
+```go
+type Conn interface {
+        // Read reads data from the connection.
+        // Read can be made to time out and return an Error with Timeout() == true
+        // after a fixed time limit; see SetDeadline and SetReadDeadline.
+        Read(b []byte) (n int, err error)
+        ...
+```

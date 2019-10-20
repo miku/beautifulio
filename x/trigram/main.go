@@ -91,7 +91,6 @@ func (r *TrigramGuesser) String() string {
 }
 
 // Guess makes a guess.
-// Exercise: Return list ordered by "confidence".
 func (r *TrigramGuesser) Guess() string {
 	var guess string
 	var best int
@@ -109,7 +108,7 @@ func (r *TrigramGuesser) Guess() string {
 	return guess
 }
 
-func TruncateString(s string, length int) string {
+func truncateString(s string, length int) string {
 	if len(s) < length {
 		return s
 	}
@@ -118,12 +117,10 @@ func TruncateString(s string, length int) string {
 
 func main() {
 	for k, v := range examples {
-		// Exercise: Rewrite and test it on the contents of
-		// http://www.corriere.it/, https://www.nytimes.com/, http://www.sueddeutsche.de/.
-		r := New(strings.NewReader(v))
-		if _, err := io.Copy(ioutil.Discard, r); err != nil {
+		guesser := New(strings.NewReader(v))
+		if _, err := io.Copy(ioutil.Discard, guesser); err != nil {
 			log.Fatal(err)
 		}
-		fmt.Printf("lang=%s, guess=%s -- %s\n", k, r.Guess(), TruncateString(v, 25))
+		fmt.Printf("lang=%s, guess=%s -- %s\n", k, guesser.Guess(), truncateString(v, 25))
 	}
 }

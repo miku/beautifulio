@@ -345,12 +345,13 @@ Interfaces may:
 * abstract a resource
 * conversion to stream
 * buffers
-* enhance functionality (decorate)
+* enhance functionality - decorate, transform
 * mock behaviour (testing)
+* utilities
 
 ----
 
-# Resource os.File
+# Resource: os.File
 
 Prototypical stream: A file.
 
@@ -376,7 +377,7 @@ If a file is just a sequence of bytes, more things will look like files.
 
 ----
 
-# Resource net.Conn
+# Resource: net.Conn
 
 > Conn is a generic stream-oriented network connection. 
 
@@ -396,12 +397,17 @@ type Conn interface {
 
 ----
 
+# Resourse
+
+----
+
 # Conversion: strings
 
 Turing strings and byte slices into streams.
 
 ```go
-r := strings.Newreader("might help testing")
+r := strings.NewReader("might help testing")
+// r := bytes.NewReader([]byte("might help testing"))
 ```
 
 ----
@@ -416,6 +422,8 @@ The byte slice of the streaming world.
 ```go
 var buf bytes.Buffer
 _, _ = io.WriteString(&buf, "data")
+// buf.String()
+// buf.Bytes()
 ```
 
 ----
@@ -450,7 +458,33 @@ process a stream, by splitting into a sequence of tokens.
 
 ----
 
+# Enhancement: compress/gzip
 
+```go
+data := []byte{
+        0x1f, 0x8b, 0x08, 0x00, 0xfc, 0x27, 0xac, 0x5d,
+        0x00, 0x03, 0x4b, 0xcf, 0xcf, 0x49, 0x4c, 0xe2,
+        0x02, 0x00, 0x4a, 0x77, 0xaa, 0x30, 0x06, 0x00,
+        0x00, 0x00,
+} // echo golab | gzip -c | xxd -i
+gzr, _ := gzip.NewReader(bytes.NewReader(data))
+if _, err := io.Copy(os.Stdout, gzr); err != nil {
+        log.Fatal(err)
+}
+```
+
+As I like [pigz](https://zlib.net/pigz/), I'm a fan of these drop-in compression
+implementations as well:
+
+* [https://github.com/klauspost/compress](https://github.com/klauspost/compress)
+
+----
+
+# Mock: 
+
+----
+
+# Utilities: 
 
 ----
 

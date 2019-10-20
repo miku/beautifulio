@@ -11,13 +11,14 @@ Golab 2019, 2019–10–21, Florence
 
 # About me
 
-SWE [@ubleipzig](https://ub.uni-leipzig.de) working mostly with Python and Go.
+SWE [@ubleipzig](https://ub.uni-leipzig.de).
 
 ![](static/737c.jpg)
 
-* a variety of open source projects in the library domain: catalogs, repositories,
-  digitization and image interop (IIIF), data acquisition, processing and
-  indexing
+* Leipzig University Library is involved in a variety of open source projects in
+  the library domain: catalogs, repositories, digitization and image interop
+  frameworks (IIIF), data acquisition, processing and indexing tools
+* Go for tools and services
 * Co-organizer of [Leipzig Gophers](https://golangleipzig.space)
 
 > [Explore IO](https://github.com/miku/exploreio) workshop at Golab 2017.
@@ -388,7 +389,7 @@ support atomic writes.
 > contrast, on more conventional systems, a file has a dozen or so attributes.
 > To specify and create a file it takes endless amount of chit-chat. If you are
 > on a UNIX system you can simply ask for a file and use it interchangeble
-> whereever you want a file.
+> whereever you want a file. -- (https://www.youtube.com/watch?v=tc4ROCJYbm0, 1982)
 
 If a file is just a sequence of bytes, more things will look like files.
 

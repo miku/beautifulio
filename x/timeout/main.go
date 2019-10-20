@@ -50,7 +50,9 @@ type Slow struct {
 // Read returns a few bytes after a given duration.
 func (r *Slow) Read(p []byte) (n int, err error) {
 	time.Sleep(r.Sleep)
-	copy(p, []byte{0x7a, 0x7a, 0x7a, 0x0a})
+	for i := 0; i < len(p); i++ {
+		p[i] = '\x7a'
+	}
 	return len(p), io.EOF
 }
 

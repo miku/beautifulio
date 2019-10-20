@@ -642,13 +642,6 @@ Example: x/timeout
 
 ----
 
-# Utility: HTTP Range Request
-
-Utilitize seekablity of servers supporting range request to request a specific
-file from a remote zip file.
-
-----
-
 # Utility: TeeReader
 
 ----
@@ -678,16 +671,17 @@ resources.
 
 ----
 
-# More nonsensical 
+# Stranger implementation 
 
-* blackout reader
+A blackout reader that blacks out occurences of certain words.
+
+Example: x/blackout
 
 ----
 
 # Optimizations
 
 * ReaderFrom
-
 
 ----
 

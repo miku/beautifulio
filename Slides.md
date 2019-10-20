@@ -13,8 +13,11 @@ Golab 2019, 2019–10–21, Florence
 
 SWE [@ubleipzig](https://ub.uni-leipzig.de) working mostly with Python and Go.
 
-Taming data – open source – writing.
+![](static/737c.jpg)
 
+* a variety of open source projects in the library domain: catalogs, repository,
+  digitization and image interop (IIIF), data acquisition, processing and
+  indexing
 * Co-organizer of [Leipzig Gophers](https://golangleipzig.space)
 
 > [Explore IO](https://github.com/miku/exploreio) workshop at Golab 2017.
@@ -585,6 +588,30 @@ Utility implementations and helper functions.
 
 # Utility: Counting
 
+An identity transform, with a side effect, e.g. counting.
+
+```go
+type CountReader struct {
+	count int64
+	r     io.Reader
+}
+
+func (r *CountReader) Read(buf []byte) (int, error) {
+	n, err := r.r.Read(buf)
+	atomic.AddInt64(&r.count, int64(n))
+	return n, err
+}
+
+func (r *CountReader) Count() int64 {
+	return atomic.LoadInt64(&r.count)
+}
+```
+
+Again: it would be simple to take the length of a byte slice, a stream is more
+memory efficient.
+
+Other stats are possible.
+
 ----
 
 # Utility: Source
@@ -594,6 +621,10 @@ Generate infinite data with finite resources.
 * zeros
 * random data
 * generated test data
+
+----
+
+# Utility: Endless 
 
 ----
 

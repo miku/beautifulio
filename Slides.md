@@ -15,6 +15,8 @@ SWE [@ubleipzig](https://ub.uni-leipzig.de) working mostly with Python and Go.
 
 Taming data – open source – writing.
 
+* Co-organizer of [Leipzig Gophers](https://golangleipzig.space)
+
 > [Explore IO](https://github.com/miku/exploreio) workshop at Golab 2017.
 
 ----
@@ -463,6 +465,24 @@ process a stream, by splitting into a sequence of tokens.
 
 ----
 
+# Enhancement: tabwriter.Writer
+
+> A Writer is a filter that inserts padding around tab-delimited columns in its
+> input to align them in the output. 
+
+> The Writer treats incoming bytes as UTF-8-encoded text consisting of cells
+> terminated by horizontal ('\t') or vertical ('\v') tabs, and newline ('\n') or
+> formfeed ('\f') characters; both newline and formfeed act as line breaks.
+
+```
+8543296|0
+6353501|65535
+   1346|5140
+    881|21588
+```
+
+----
+
 # Transformation: compress/gzip
 
 ```go
@@ -487,19 +507,54 @@ implementations as well:
 
 # Transformation: Serialization
 
-Many subpackages of package encoding provide encoders or decoders for working
+Many subpackages of package encoding provide encoders and decoders for working
 with streams, e.g. json, xml, gob, base64.
 
 ```go
+// base64.NewDecoder
 func NewDecoder(enc *Encoding, r io.Reader) io.Reader
+```
+
+```go
+_ = json.NewEncoder(os.Stdout).Encode(value)
 ```
 
 ----
 
-# Mock:
+# Mock implementations
 
-* simulate failure, timeouts
-* slow reader
+Implementations of readers and writers for test purposes.
+
+* simulate failure cases
+* infinite stream
+
+
+----
+
+# Mock: Infinite reader
+
+```
+// infiniteReader satisfies Read requests as if the contents of buf
+// loop indefinitely.
+type infiniteReader struct {
+        buf    []byte
+        offset int
+}
+
+func (r *infiniteReader) Read(b []byte) (int, error) {
+        n := copy(b, r.buf[r.offset:])
+        r.offset = (r.offset + n) % len(r.buf)
+        return n, nil
+}
+```
+
+----
+
+# Mock: Slow reader
+
+Insert delays into read operations.
+
+* [Asciicast](https://raw.githubusercontent.com/miku/exploreio/wip/casts/cowmf6c23w1prceotyf54lt19.gif)
 
 ----
 

@@ -558,9 +558,19 @@ Insert delays into read operations.
 
 ----
 
+# Test case reader examples
+
+* bufio_test.slowReader
+* bufio_test.errorThenGoodReader
+* bufio_test.rot13Reader
+* encoding/base64.faultInjectReader
+
+----
+
 # Utilities: 
 
 * counting bytes
+* encoding/csv.nTimes
 * ioutil.Discard
 * TeeReader
 * MultiReader

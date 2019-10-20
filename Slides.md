@@ -15,7 +15,7 @@ SWE [@ubleipzig](https://ub.uni-leipzig.de) working mostly with Python and Go.
 
 ![](static/737c.jpg)
 
-* a variety of open source projects in the library domain: catalogs, repository,
+* a variety of open source projects in the library domain: catalogs, repositories,
   digitization and image interop (IIIF), data acquisition, processing and
   indexing
 * Co-organizer of [Leipzig Gophers](https://golangleipzig.space)
@@ -615,7 +615,6 @@ Utility implementations and helper functions.
 * Sink: ioutil.Discard
 * Source: infinite data
 * Limits: timeout Reader
-* Translate: http range requests
 * Error handling: stickyErrWriter
 * Split stream: TeeReader
 * Merge streams: MultiReader

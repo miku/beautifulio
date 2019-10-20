@@ -609,7 +609,7 @@ func (b *readDelayer) Read(p []byte) (n int, err error) {
 
 Utility implementations and helper functions.
 
-* Counting: count total bytes read or written
+* Side effects: count total bytes read or written
 * Patterns: encoding/csv.nTimes
 * Sink: ioutil.Discard
 * Source: infinite data
@@ -654,6 +654,29 @@ Other stats are possible.
 Guess language of stream with a trigram.
 
 * Example: x/trigram
+
+----
+
+# Utility: Source
+
+From: encoding/csv/reader_test.go
+
+```go
+// nTimes is an io.Reader which yields the string s n times.
+type nTimes struct {
+        s   string
+        n   int
+        off int
+}
+```
+
+It is used to generate testdata to benchmark the csv implementation.
+
+```go
+...
+r := NewReader(&nTimes{s: rows, n: b.N})
+...
+```
 
 ----
 
@@ -709,6 +732,12 @@ resources.
 
 ----
 
+# Utility: Attach an event to a reader
+
+* onEOF reader
+
+----
+
 # Utility: stickyErrWriter
 
 Stolen from [Hacking with Andrew and Brad](https://www.youtube.com/watch?v=yG-UaBJXZ80).
@@ -735,11 +764,33 @@ func (sew stickyErrWriter) Write(p []byte) (n int, err error) {
 
 ----
 
-# Optimizations
+# Copy 
 
-* ReaderFrom
+We used `io.Copy` all along.
 
+> Copy copies from src to dst until either EOF is reached on src or an error
+> occurs. It returns the number of bytes copied and the first error encountered
+> while copying, if any.
 
+It uses an internal buffer (of size 32k) to move data from reader to writer.
+
+----
+
+# Copy Optimizations
+
+If the source (a reader) has a `WriteTo(w io.Writer)` methods, or the
+destination (a writer) has a `ReadFrom(r io.Reader)` method (implements
+`io.ReadFrom`), then `io.Copy` does not need to use its internal buffer.
+
+![](static/readerfrom18.jpg)
+
+----
+
+# Wrap up
+
+* stream interfaces are very versatile
+* you will mostly need to implement a single method
+* allows to you adopt to a large number of existing components
 
 ----
 

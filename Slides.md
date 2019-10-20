@@ -181,8 +181,8 @@ Writers are use for hash functions, standard output, formatting, and more.
 
 # Streams
 
-As layed out in the *love letter*, the use of `ioutil.ReadAll` is debatable.
-It's in the standard library and useful, but not always necessary.
+As layed out in the *love letter*, the use of `ioutil.ReadAll` is not always the
+answer. It's in the standard library and useful, but not always necessary.
 
 ```go
 b, err := ioutil.ReadAll(r)
@@ -535,13 +535,22 @@ _ = json.NewEncoder(os.Stdout).Encode(value)
 
 ----
 
+# Transformation: Blackout 
+
+Stranger implementation. A blackout reader that blacks out occurences of certain
+words.
+
+Example: x/blackout
+
+
+----
+
 # Mock implementations
 
 Implementations of readers and writers for test purposes.
 
 * simulate failure cases
 * infinite stream
-
 
 ----
 
@@ -579,6 +588,20 @@ Insert delays into read operations.
 * bufio_test.errorThenGoodReader
 * bufio_test.rot13Reader
 * encoding/base64.faultInjectReader
+
+Example from k8s (how do implementations handle slow responses):
+
+```go
+type readDelayer struct {
+        delay time.Duration
+        io.ReadCloser
+}
+
+func (b *readDelayer) Read(p []byte) (n int, err error) {
+        defer time.Sleep(b.delay)
+        return b.ReadCloser.Read(p)
+}
+```
 
 ----
 
@@ -655,6 +678,14 @@ Example: x/timeout
 
 # Utility: TeeReader
 
+The `io.TeeReader` function allows to duplicate a stream.
+
+```go
+r := strings.NewReader("some io.Reader stream to be read\n")
+var buf bytes.Buffer
+tee := io.TeeReader(r, &buf)
+```
+
 ----
 
 # Utility: MultiReader
@@ -701,14 +732,6 @@ func (sew stickyErrWriter) Write(p []byte) (n int, err error) {
 	return
 }
 ```
-
-----
-
-# Stranger implementation 
-
-A blackout reader that blacks out occurences of certain words.
-
-Example: x/blackout
 
 ----
 

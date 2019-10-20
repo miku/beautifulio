@@ -2,7 +2,7 @@
 
 > A tour through standard library pkg/io and various implementations of its interfaces.
 
-Golab 2019, 2019–10–21, Florence
+[GOLAB 2019](https://golab.io), 2019–10–21, Florence
 [Martin Czygan](mailto:martin.czygan@gmail.com)
 
 <!-- Die Brautleute; short summaries at the beginning of the sections -->

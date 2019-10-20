@@ -630,16 +630,13 @@ Generate infinite data with finite resources.
 * zeros
 * random data
 
-```
-rand.Reader()
-
-----
-
-# Utility: Endless 
+Example: x/randbase
 
 ----
 
 # Utility: Timeout
+
+
 
 ----
 

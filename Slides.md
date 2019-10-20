@@ -343,6 +343,8 @@ interesting/frustrating bug related to ioutil.Discard, I recommend
 Interfaces may:
 
 * abstract a resource
+* conversion to stream
+* buffers
 * enhance functionality (decorate)
 * mock behaviour (testing)
 
@@ -394,6 +396,30 @@ type Conn interface {
 
 ----
 
+# Conversion: strings
+
+Turing strings and byte slices into streams.
+
+```go
+r := strings.Newreader("might help testing")
+```
+
+----
+
+# Buffers: bytes.Buffer
+
+> A Buffer is a variable-sized buffer of bytes with Read and Write methods. The
+> zero value for Buffer is an empty buffer ready to use. 
+
+The byte slice of the streaming world.
+
+```go
+var buf bytes.Buffer
+_, _ = io.WriteString(&buf, "data")
+```
+
+----
+
 # Enhancement: bufio.Reader
 
 > Package bufio implements buffered I/O. It wraps an io.Reader or io.Writer
@@ -421,6 +447,10 @@ reads.
 
 A further abstraction, `bufio.Scanner` is built from a reader, which allows to
 process a stream, by splitting into a sequence of tokens.
+
+----
+
+
 
 ----
 

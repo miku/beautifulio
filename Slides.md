@@ -636,7 +636,9 @@ Example: x/randbase
 
 # Utility: Timeout
 
+Encapsulate a timeout in a read operation.
 
+Example: x/timeout
 
 ----
 

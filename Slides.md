@@ -567,16 +567,73 @@ Insert delays into read operations.
 
 ----
 
-# Utilities: 
+# Utilities
 
-* counting bytes
-* encoding/csv.nTimes
-* ioutil.Discard
-* TeeReader
-* MultiReader
-* infinite data
-* timeout Reader
-* http range requests
+Utility implementations and helper functions.
+
+* Counting: count total bytes read or written
+* Patterns: encoding/csv.nTimes
+* Sink: ioutil.Discard
+* Source: infinite data
+* Limits: timeout Reader
+* Translate: http range requests
+* Error handling: stickyErrWriter
+* Split stream: TeeReader
+* Merge streams: MultiReader
+
+----
+
+# Utility: Counting
+
+----
+
+# Utility: Source
+
+Generate infinite data with finite resources.
+
+* zeros
+* random data
+* generated test data
+
+----
+
+# Utility: Timeout
+
+----
+
+# Utility: HTTP Range Request
+
+Utilitize seekablity of servers supporting range request to request a specific
+file from a remote zip file.
+
+----
+
+# Utility: TeeReader
+
+----
+
+# Utility: MultiReader
+
+```go
+rs := []io.Reader{
+        strings.NewReader("Hello\n"),
+        strings.NewReader("Gopher\n"),
+        strings.NewReader("World\n"),
+        strings.NewReader("!\n"),
+}
+r := io.MultiReader(rs...)
+if _, err := io.Copy(os.Stdout, r); err != nil {
+        log.Fatal(err)
+}
+```
+
+Possible use cases: Unify multiples of the same thing (e.g. data chunked into
+files) or a variety of different things, e.g. strings, files and remote
+resources.
+
+----
+
+# Utility: stickyErrWriter
 
 ----
 

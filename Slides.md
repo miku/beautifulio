@@ -557,6 +557,7 @@ func (r *infiniteReader) Read(b []byte) (int, error) {
 
 Insert delays into read operations.
 
+* Example: x/slowreader
 * [Asciicast](https://raw.githubusercontent.com/miku/exploreio/wip/casts/cowmf6c23w1prceotyf54lt19.gif)
 
 ----
@@ -614,13 +615,23 @@ Other stats are possible.
 
 ----
 
+# Utility: Language Guesser
+
+Guess language of stream with a trigram.
+
+* Example: x/trigram
+
+----
+
 # Utility: Source
 
 Generate infinite data with finite resources.
 
 * zeros
 * random data
-* generated test data
+
+```
+rand.Reader()
 
 ----
 

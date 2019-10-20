@@ -93,10 +93,11 @@ You might find some missing pieces elsewhere.
 # How many readers, writers are there?
 
 ```shell
-$ guru -json implements /usr/local/go/src/io/io.go:#3309
+$ guru -json implements /usr/local/go/src/io/io.go:#3309,#3800
 ```
 
-I counted over 280 implementations of io.Reader and X of io.Writer.
+I counted over 200 implementations of each, io.Reader and io.Writer in the Go
+tree and subrepositories. 
 
 ----
 
@@ -346,9 +347,18 @@ Prototypical stream: A file.
 And alternatives and substitutions, e.g. dummy files for tests or file that
 support atomic writes.
 
-Historical note:
+----
 
-> A file is just a sequence of bytes. (XXX: Unix documentary)
+# Historical note
+
+![](static/attunix.png)
+
+
+> A file is simply a sequence of bytes. Its main attribute is its size. By
+> contrast, on more conventional systems, a file has a dozen or so attributes.
+> To specify and create a file it takes endless amount of chit-chat. If you are
+> on a UNIX system you can simply ask for a file and use it interchangeble
+> whereever you want a file. (XXX: Unix documentary)
 
 If a file is just a sequence of bytes, more things will look like files.
 
@@ -364,3 +374,6 @@ type Conn interface {
         Read(b []byte) (n int, err error)
         ...
 ```
+
+----
+

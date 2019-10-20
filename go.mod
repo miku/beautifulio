@@ -23,6 +23,7 @@ require (
 	github.com/miku/solrbulk v0.3.4 // indirect
 	github.com/miku/span v0.1.305 // indirect
 	github.com/rogpeppe/godef v1.1.1 // indirect
+	github.com/rwcarlsen/goexif v0.0.0-20190401172101-9e8deecbddbd // indirect
 	github.com/stamblerre/gocode v0.0.0-20190327203809-810592086997 // indirect
 	github.com/tobert/pcstat v0.0.0-20170528024208-91a7346e5b46 // indirect
 	github.com/zmb3/gogetdoc v0.0.0-20190228002656-b37376c5da6a // indirect

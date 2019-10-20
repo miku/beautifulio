@@ -732,6 +732,14 @@ resources.
 
 ----
 
+# Utility: Duplicating a ReadCloser
+
+A response body is a `io.ReadCloser` and can be read only once.
+
+Example: x/duprc
+
+----
+
 # Utility: Attach an event to a reader
 
 * onEOF reader

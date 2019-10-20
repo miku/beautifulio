@@ -89,7 +89,8 @@ The concrete types are: `LimitedReader`, `PipeReader`, `PipeWriter`,
 
 # Missing interfaces
 
-You might find some missing pieces elsewhere.
+You might find some missing pieces elsewhere (here:
+[https://github.com/go4org/go4](https://github.com/go4org/go4)).
 
 ![](static/go4extra.png)
 
@@ -127,7 +128,7 @@ some bytes and also both of the allowed EOF behaviors.
 
 ----
 
-# Notes 
+# Notes on Reader
 
 ```go
 type Reader interface {
@@ -140,6 +141,16 @@ type Reader interface {
 > Implementations must not retain p.
 
 This hints at the streaming nature of this interface.
+
+----
+
+# Notes on Reader
+
+The `Read` function does not guarantee, the passed byte slice will by completely
+filled. This is up to the implementation.
+
+* `io.ReadAtLeast` -- will fail, if not at least a given number of bytes are read
+* `io.ReadFull` -- special case; will fail, if the given byte slices is not completely filled
 
 ----
 
@@ -669,6 +680,28 @@ resources.
 
 # Utility: stickyErrWriter
 
+Stolen from [Hacking with Andrew and Brad](https://www.youtube.com/watch?v=yG-UaBJXZ80).
+
+* Use case: Implement a writer, where an error sticks around across multiple write calls.
+
+```go
+
+// stickyErrWriter keeps an error around, so you can *occasionally* check if an error occured.
+type stickyErrWriter struct {
+	w   io.Writer
+	err *error
+}
+
+func (sew stickyErrWriter) Write(p []byte) (n int, err error) {
+	if *sew.err != nil {
+		return 0, *sew.err
+	}
+	n, err = sew.w.Write(p)
+	*sew.err = err
+	return
+}
+```
+
 ----
 
 # Stranger implementation 
@@ -682,6 +715,8 @@ Example: x/blackout
 # Optimizations
 
 * ReaderFrom
+
+
 
 ----
 

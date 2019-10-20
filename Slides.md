@@ -397,7 +397,12 @@ type Conn interface {
 
 ----
 
-# Resourse
+# Example HTTP GET
+
+```go
+conn, _ := net.Dial("tcp", "golang.org:80")
+_, _ = io.WriteString(conn, "GET / HTTP/1.0\r\n\r\n")
+```
 
 ----
 
@@ -458,7 +463,7 @@ process a stream, by splitting into a sequence of tokens.
 
 ----
 
-# Enhancement: compress/gzip
+# Transformation: compress/gzip
 
 ```go
 data := []byte{
@@ -480,11 +485,46 @@ implementations as well:
 
 ----
 
-# Mock: 
+# Transformation: Serialization
+
+Many subpackages of package encoding provide encoders or decoders for working
+with streams, e.g. json, xml, gob, base64.
+
+```go
+func NewDecoder(enc *Encoding, r io.Reader) io.Reader
+```
+
+----
+
+# Mock:
+
+* simulate failure, timeouts
+* slow reader
 
 ----
 
 # Utilities: 
+
+* counting bytes
+* ioutil.Discard
+* TeeReader
+* MultiReader
+* infinite data
+* timeout Reader
+* http range requests
+
+----
+
+# More nonsensical 
+
+* blackout reader
+
+----
+
+# Optimizations
+
+* ReaderFrom
+
 
 ----
 

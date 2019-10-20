@@ -140,17 +140,17 @@ This hints at the streaming nature of this interface.
 
 # Implementations
 
+Readers can be:
+
 * files
 * network connections
 * HTTP response bodies
-* standard input and output
+* standard input
 * compression
-* hashing
-* encoding
-* formatting
+* serialization
 * ...
 
-Many uses in testing as well.
+Writers are use for hash functions, standard output, formatting, and more.
 
 ----
 
@@ -333,12 +333,22 @@ func main() {
 ```
 
 The standard library implementation is called `ioutil.Discard` (for an
-interesting/frustrating bug related to ioutil.Discard, read
+interesting/frustrating bug related to ioutil.Discard, I recommend
 [#4589](https://github.com/golang/go/issues/4589)).
 
 ----
 
-# Use case: File
+# Use cases
+
+Interfaces may:
+
+* abstract a resource
+* enhance functionality (decorate)
+* mock behaviour (testing)
+
+----
+
+# Resource os.File
 
 Prototypical stream: A file.
 
@@ -351,20 +361,22 @@ support atomic writes.
 
 # Historical note
 
-![](static/attunix.png)
+![](static/attunix30.png)
 
 
 > A file is simply a sequence of bytes. Its main attribute is its size. By
 > contrast, on more conventional systems, a file has a dozen or so attributes.
 > To specify and create a file it takes endless amount of chit-chat. If you are
 > on a UNIX system you can simply ask for a file and use it interchangeble
-> whereever you want a file. (XXX: Unix documentary)
+> whereever you want a file.
 
 If a file is just a sequence of bytes, more things will look like files.
 
 ----
 
-# Use case: Networking
+# Resource net.Conn
+
+> Conn is a generic stream-oriented network connection. 
 
 ```go
 type Conn interface {
@@ -373,7 +385,43 @@ type Conn interface {
         // after a fixed time limit; see SetDeadline and SetReadDeadline.
         Read(b []byte) (n int, err error)
         ...
+        // Write writes data to the connection.
+        // Write can be made to time out and return an Error with Timeout() == true
+        // after a fixed time limit; see SetDeadline and SetWriteDeadline.
+        Write(b []byte) (n int, err error)
+        ...
 ```
 
 ----
 
+# Enhancement: bufio.Reader
+
+> Package bufio implements buffered I/O. It wraps an io.Reader or io.Writer
+> object, creating another object (Reader or Writer) that also implements the
+> interface but provides buffering and some help for textual I/O. 
+
+```go
+// Reader implements buffering for an io.Reader object.
+type Reader struct {
+	buf          []byte
+	rd           io.Reader // reader provided by the client
+	r, w         int       // buf read and write positions
+	err          error
+	lastByte     int // last byte read for UnreadByte; -1 means invalid
+	lastRuneSize int // size of last rune read for UnreadRune; -1 means invalid
+}
+```
+
+----
+
+# Enhancement: bufio.Reader
+
+Provides simplifications, e.g. to read up to given delimiters, e.g. linewise
+reads.
+
+A further abstraction, `bufio.Scanner` is built from a reader, which allows to
+process a stream, by splitting into a sequence of tokens.
+
+----
+
+# Thanks

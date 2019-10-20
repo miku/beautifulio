@@ -224,13 +224,14 @@ _, _ = io.Copy(os.Stdout, resp.Body)
 
 * memory efficient
 * can work with data, that does not fit in memory
-* allows to work on different protocol parts differently (e.g. HTTP header vs HTTP body)
+* allows to work on different protocol parts differently (e.g. HTTP header vs
+  possibly large HTTP response body)
 
 ----
 
 # Another example
 
-We often need to unmarshal JSON.
+Lots of data today comes in JSON, which we need to unmarshal.
 
 ```go
 _ = json.Unmarshal(data, &v) // data might come from ioutil.ReadAll(resp.Body)
@@ -356,14 +357,14 @@ interesting/frustrating bug related to ioutil.Discard, I recommend
 
 # Use cases
 
-Interfaces may:
+Implementations may allow:
 
-* abstract a resource
-* conversion to stream
-* buffers
-* enhance functionality - decorate, transform
+* to abstract a (physical) resource
+* to convert something into a stream
+* define buffers
+* to enhance functionality - decorate, transform
 * mock behaviour (testing)
-* utilities
+* to be used as utilities
 
 ----
 
@@ -742,7 +743,27 @@ Example: x/duprc
 
 # Utility: Attach an event to a reader
 
-* onEOF reader
+```go
+type onEOFreader struct {
+	r io.Reader
+	f func()
+}
+
+func (r *onEOFreader) Read(p []byte) (n int, err error) {
+	n, err = r.r.Read(p)
+	if err == io.EOF {
+		r.f()
+	}
+	return n, err
+}
+
+func main() {
+	r := onEOFreader{r: os.Stdin, f: func() {
+		log.Printf("done reading")
+	}}
+	_, _ := io.Copy(os.Stdout, &r)
+} 
+```
 
 ----
 

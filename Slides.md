@@ -810,7 +810,7 @@ If the source (a reader) has a `WriteTo(w io.Writer)` methods, or the
 destination (a writer) has a `ReadFrom(r io.Reader)` method (implements
 `io.ReadFrom`), then `io.Copy` does not need to use its internal buffer.
 
-![](static/readerfrom18.jpg)
+![](static/readerfrom18-40.jpg)
 
 ----
 

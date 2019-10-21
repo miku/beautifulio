@@ -644,9 +644,7 @@ func (r *CountReader) Count() int64 {
 ```
 
 Again: it would be simple to take the length of a byte slice, a stream is more
-memory efficient.
-
-Other stats are possible.
+memory efficient. Other stats are possible.
 
 ----
 

@@ -13,7 +13,7 @@ type UpperReader struct {
 
 func (r *UpperReader) Read(p []byte) (int, error) {
 	n, err := r.r.Read(p)
-	copy(p, bytes.ToUpper(p))
+	copy(p, bytes.ToUpper(p)) // Breaks on unicode.
 	return n, err
 }
 
